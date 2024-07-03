@@ -1,8 +1,12 @@
 "use strict";
+const express = require('express')
+const app = express();
+const server = require("http").Server(app)
 
 let WebSocketServer = require('ws').Server;
 let port = 8080;
-let wsServer = new WebSocketServer({ port: port });
+let wsServer = new WebSocketServer({ server });
+
 const ip = require('ip');
 console.log('websocket server start.' + ' ipaddress = ' + ip.address() + ' port = ' + port);
 
@@ -29,3 +33,7 @@ function isSame(ws1, ws2) {
     // -- compare object --
     return (ws1 === ws2);
 }
+
+server.listen(port, () => {
+    console.log(`Server started at  ${port}`);
+  });
